@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     banned: {
-        Boolean,
+        type: Boolean,
         required:true,
         default: false
     },

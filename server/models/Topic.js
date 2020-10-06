@@ -7,7 +7,7 @@ const TopicSchema = new mongoose.Schema({
         ref: 'Category'
     },
     title: {
-        String,
+        type: String,
         required: true
     },
     user_id: {
