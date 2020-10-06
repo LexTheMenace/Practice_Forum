@@ -12,7 +12,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Routes
-
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Hey'
+    })
+})
 // Error Handling
 app.use(notFound);
 app.use(errorHandler);
