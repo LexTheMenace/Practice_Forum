@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-const { notFound, errorHandler } = require('./middleware')
+const { checkAuthHeaderSetUser, notFound, errorHandler } = require('./middleware')
 const auth = require('./auth');
 
 var app = express();
@@ -26,6 +26,7 @@ mongoose.connect(uri)
  .then(() => console.log('MongoDB Connected...'))
  .catch(err => console.log(err))
 
+app.use(checkAuthHeaderSetUser)
 // Routes
 app.get('/', (req, res) => {
     res.json({
