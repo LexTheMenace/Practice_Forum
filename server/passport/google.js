@@ -3,12 +3,12 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const users = require('../controllers/userController');
 
- passport.serializeUser((user, done) => {
+/*  passport.serializeUser((user, done) => {
   done(null, user);
 });
 passport.deserializeUser((id, done) => {
   done(null, id);
-}); 
+});  */
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,

@@ -16,9 +16,12 @@ router.get('/google/callback', ( req, res, next ) => {
 
     try {
       const token = await create(user);
-    res.json({ token })
+      // HIDE TOKEN IN FUTURE/ BEFORE DEPLOYMENT
+      res.redirect(`${process.env.CLIENT_REDIRECT+token}`)
 
     } catch (err) {
+      res.redirect(`${process.env.CLIENT_REDIRECT}${process.env.CLIENT_ERR_REDIRECT}`);
+      
       next(err);
     }
     
