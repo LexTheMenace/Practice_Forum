@@ -1,8 +1,14 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+const passport = require('passport');
 const mongoose = require('mongoose');
+
+require('dotenv').config();
+
 const { notFound, errorHandler } = require('./middleware')
+const auth = require('./auth');
 
 var app = express();
 
@@ -25,6 +31,10 @@ app.get('/', (req, res) => {
         message: 'Hey'
     })
 })
+
+// Auth
+app.use('/auth', auth);
+
 // Error Handling
 app.use(notFound);
 app.use(errorHandler);

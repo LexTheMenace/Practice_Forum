@@ -8,11 +8,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // URL string for Thumbnail image
-    email: {
-        type: String,
-        required: true
-    },
+    email: String,
     google_id: {
         type: String,
         required: true
@@ -25,7 +21,8 @@ const userSchema = new mongoose.Schema({
     role_id: {
         type: Schema.Types.ObjectId,
         ref: 'Role'
-    }
+    },
+    image_url: String
 
 });
 
