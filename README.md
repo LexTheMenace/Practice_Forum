@@ -15,3 +15,7 @@ npm run dev
 ### Tech Used
 React
 Bootswatch
+Node
+Express
+MongoDB
+Mongoose

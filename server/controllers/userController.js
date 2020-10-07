@@ -1,4 +1,5 @@
-const db = require('../models')
+const db = require('../models');
+const Joi = require('joi');
 
 const schema = Joi.object().keys({
   display_name: Joi.string().required(),
@@ -14,23 +15,37 @@ const schema = Joi.object().keys({
 
 
 module.exports = {
-  findByEmail: (req, res) => {
-    console.log(req.params);
-    db.User
-      .find({ email: req.body.email})
-      .then(user => res.json(user))
-      .catch(err => res.status(422).json(err));
+  findByEmail: (email) => {
+    return db.User
+      .findOne({ email })
+      .then(user => {
+        return user;
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+  update: (_id, user) => {
+    return db.User
+      .findOneAndUpdate({ _id }, user)
+      .then(user => {
+        return user
+      })
+      .catch(err => err);
   },
   joiInsert: (req, res) => {
     db.User
       .create(req.body.newUser)
       .then(user => res.json(user))
       .catch(err => res.status(422).json(err));
-    },
-  insert: (req, res) => {
-    db.User
-      .create(req.body.newUser)
-      .then(user => res.json(user))
-      .catch(err => res.status(422).json(err));
-    }
-  };
+  },
+  insert: (user) => {
+    return db.User
+      .create(user)
+      .then(user => {
+        console.log(user);
+        return user;
+      })
+      .catch(err => console.log(err));
+  }
+};

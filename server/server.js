@@ -16,6 +16,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
 
 //Set db to variable
 const uri = process.env.MONGODB_URI || require('./config/keys').mongoURI; 
@@ -31,7 +32,11 @@ app.get('/', (req, res) => {
         message: 'Hey'
     })
 })
-
+app.get('/login', (req, res) => {
+    res.json({
+        message: 'Didn"t work'
+    })
+})
 // Auth
 app.use('/auth', auth);
 

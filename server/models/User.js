@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
 const userSchema = new mongoose.Schema({
 
     display_name: {
@@ -15,7 +14,6 @@ const userSchema = new mongoose.Schema({
     },
     banned: {
         type: Boolean,
-        required:true,
         default: false
     },
     role_id: {
