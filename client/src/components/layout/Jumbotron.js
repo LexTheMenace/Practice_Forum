@@ -15,7 +15,7 @@ export default function Jumbotron() {
         <hr class="my-4"/>
         <p>We all on a journey to improve ourselves, come kick it with me!</p>
         <p class="lead">
-          <a class="btn btn-primary btn-lg" href="#" role="button">Sign Up</a>
+          <a class="btn btn-primary btn-lg" href="www.github.com" role="button">Sign Up</a>
           <a class="btn btn-primary btn-lg" href={getLoginUrl()} role="button">Log In</a>
 
         </p>

@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css';
 import "bootswatch/dist/slate/bootstrap.css";
 import AppNav from './components/layout/AppNav';
 import Jumbotron from './components/layout/Jumbotron';
 import LoginToken from './components/LoginToken';
+import { Provider } from './context';
 
-function App() {
-  console.log(window);
-  return (
-    <Router>
+class App extends Component {
+  render(){
+
+    return (
+      <Provider>
+<Router>
     <AppNav />
         <Switch>
       <div className="container">
-          <Route path='/login/token/'>
-            <LoginToken/>
+          <Route path='/login/token/:token'>
+            <LoginToken />
           </Route>
           <Route exact path='/'>
             <Jumbotron />
           </Route>
       </div>
         </Switch>
-    </Router>
+    </Router> 
+    </Provider>
 
 
-
-  );
+);
+}
 }
 
 export default App;

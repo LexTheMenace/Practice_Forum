@@ -3,20 +3,12 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const users = require('../controllers/userController');
 
-/*  passport.serializeUser((user, done) => {
-  done(null, user);
-});
-passport.deserializeUser((id, done) => {
-  done(null, id);
-});  */
-
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "/auth/google/callback"
   }, async (accessToken, refreshToken, profile, cb) => {
     const email = profile.emails[0].value;
-    
     const googleUser = {
       display_name: profile.displayName,
       email,
