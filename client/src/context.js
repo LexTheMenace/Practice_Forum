@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 
 //Makes info available everywhere in the app
 const Context = React.createContext();
-
+console.log(Context);
 const reducer = (state, action) => {
-    console.log('Welcome to the Reducer');
+    console.log(action);
 
     switch (action.type) {
         case 'SET_TOKEN':
@@ -17,7 +17,7 @@ const reducer = (state, action) => {
         case 'SET_USER':
             return {
                 ...state,
-                user: action.payload.user
+                user: action.payload
             };
         default:
             return state;
@@ -35,9 +35,7 @@ export class Provider extends Component {
 
         return (
             // passing state as value to access anywhere you bring this in
-            <Context.Provider value={{
-                state: this.state,
-            }}>
+            <Context.Provider value={this.state}>
                 {this.props.children}
             </Context.Provider>
         )
