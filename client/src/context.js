@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { getAllCategories } from './API'
+import { getAllCategories, createCategory } from './API'
 //Makes info available everywhere in the app
 export const Context = React.createContext();
 
 
 const reducer = (state, action) => {
     console.log(action);
-
     switch (action.type) {
         case 'SET_TOKEN':
 
@@ -24,6 +23,11 @@ const reducer = (state, action) => {
                 ...state,
                 categories: action.payload
             };
+            case 'PUSH_CATEGORY':
+                return {
+                    ...state,
+                    categories: [...state.categories, action.payload]
+                };
         default:
             return state;
     }
@@ -69,10 +73,16 @@ export class Provider extends Component {
             payload: categories
         })
     }
-
-    /* componentDidMount(){
+    addCategory = async (newCategory) => {
+        const category = await createCategory(newCategory);
+        this.dispatch({
+            type: 'PUSH_CATEGORY',
+            payload: category
+        })
+    }
+     componentDidMount(){
         this.login(localStorage.token)
-    } */
+    } 
     render() {
 
         return (
@@ -85,7 +95,8 @@ export class Provider extends Component {
                         isLoggedIn: this.isLoggedIn,
                         isAdmin: this.isAdmin,
                         login: this.login,
-                        loadCategories: this.loadCategories
+                        loadCategories: this.loadCategories,
+                        addCategory: this.addCategory
 
                     }
                 }} >

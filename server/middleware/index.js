@@ -16,25 +16,30 @@ async function checkAuthHeaderSetUser(req, res, next) {
 }
 
 async function checkAuthHeaderSetUserUnauthorized(req, res, next) {
+    
     const auth = req.get('authorization');
+    
     if (auth) {
         const token = auth.split(' ')[1];
         try {
             const user = await verify(token);
-            req.user = user;
-            return next();
+            req.user = user.user;
+            next();
+            return    
         } catch (err) {
-            console.log(err)
+    res.status(401)
+    next(new Error('Un-Authorized'));
         }
     }
+  
     res.status(401);
     next(new Error('Un-Authorized'));
 }
 
 function isAdmin( req, res, next ) {
-    
     if (req.user && req.user.role_id === '5f7c93fd189c9a186c9ed6d9') {
         next();
+        return 
     }
     res.status(401)
     next(new Error('Un-Authorized'));
@@ -59,5 +64,6 @@ module.exports = {
     notFound,
     errorHandler,
     checkAuthHeaderSetUser,
-    checkAuthHeaderSetUserUnauthorized
+    checkAuthHeaderSetUserUnauthorized,
+    isAdmin
 }

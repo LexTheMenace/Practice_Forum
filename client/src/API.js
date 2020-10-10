@@ -1,5 +1,4 @@
 import axios from 'axios';
-/* import { Context, useContext } from 'react' */
 let BASE_URL = 'http:deployed.url';
 
  if(window.location.hostname === 'localhost') {
@@ -12,10 +11,12 @@ export async function getAllCategories(){
   const categories = await res.data
   return categories
 }
-/* 
-  export function onLoad(Context){
-    const theme = useContext(Context);
-    const { login } = theme.methods;
-    login(localStorage.token);
 
-  } */
+export async function createCategory(newCategory){
+  const res = await axios.post(`${API_URL}/categories`, newCategory,  {
+    headers: {
+    authorization: `Bearer ${localStorage.token}`
+  }} )
+  const category = await res.data
+  return category
+}

@@ -1,7 +1,7 @@
 var router = require('express').Router();
 
 const categories = require('../../controllers/categoryController');
-const { checkAuthHeaderSetUserUnauthorized } = require('../../middleware');
+const { checkAuthHeaderSetUserUnauthorized, isAdmin } = require('../../middleware');
 
 
 router.get('/', async (req, res, next) => {
@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/', checkAuthHeaderSetUserUnauthorized, async (req, res, next) => {
+router.post('/',  checkAuthHeaderSetUserUnauthorized, isAdmin, async (req, res, next) => {
     try{
         const category = await categories.insert(req.body)
         return res.json(category)
