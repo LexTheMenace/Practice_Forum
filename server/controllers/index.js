@@ -1,7 +1,7 @@
 const Joi = require('joi');
-const db = require('../db');
+const db = require('../models');
 
-async function insertIntoTableAndValidate(table_name, item, schema) {
+/* async function insertIntoTableAndValidate(table_name, item, schema) {
   const result = Joi.validate(item, schema);
   console.log(result)
   
@@ -11,7 +11,19 @@ async function insertIntoTableAndValidate(table_name, item, schema) {
   } else {
     return Promise.reject(result.error);
   }
+} */
+
+function insertIntoTableAndValidate(item) {
+  console.log(item);
+  return db.Item
+      .create(item)
+      .then(item => {
+        console.log(item);
+        return item;
+      })
+      .catch(err => console.log(err));
 }
+
 
 module.exports = {
   insertIntoTableAndValidate,

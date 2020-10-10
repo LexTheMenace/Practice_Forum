@@ -47,5 +47,13 @@ module.exports = {
         return user;
       })
       .catch(err => console.log(err));
+  },
+  findAdmins: () => {
+    return db.User
+        .find({ role_id: '5f7c93fd189c9a186c9ed6d9' })
+        .then(user => {
+          return user
+        })
+        .catch(err => console.log(err));
   }
 };

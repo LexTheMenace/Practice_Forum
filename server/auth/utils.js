@@ -19,5 +19,15 @@ module.exports = {
             });
         });
     },
+    /* setAdminIfNotExists: (user) => {
+        const admins = users.findAdmins();
+        if (admins.length == 0) {
+            user = await users.update(user, id, {
+                role_id: 3
+            });
+            return user
+        }
+        return user
+    } */
 };
 

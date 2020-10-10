@@ -9,7 +9,7 @@ async function checkAuthHeaderSetUser(req, res, next) {
             req.user = user;
             console.log(user);
         } catch (err) {
-            console.log(error);
+            console.log(err);
         }
     }
     next();
@@ -28,6 +28,15 @@ async function checkAuthHeaderSetUserUnauthorized(req, res, next) {
         }
     }
     res.status(401);
+    next(new Error('Un-Authorized'));
+}
+
+function isAdmin( req, res, next ) {
+    
+    if (req.user && req.user.role_id === '5f7c93fd189c9a186c9ed6d9') {
+        next();
+    }
+    res.status(401)
     next(new Error('Un-Authorized'));
 }
 

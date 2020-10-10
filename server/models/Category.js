@@ -7,7 +7,6 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // URL string for Thumbnail image
     description: {
         type: String,
         required: true
