@@ -23,10 +23,10 @@ export default function Jumbotron() {
 
     return (
         <div className="jumbotron">
-        <h1 className="display-3">Howdy Y'all!</h1>
-        <p className="lead">Welcome to Kia's Corner! </p>
+        <h1 className="display-3">Seasons Greetings!</h1>
+        <p className="lead">Welcome to The forum! </p>
         <hr className="my-4"/>
-        <p>We all on a journey to improve ourselves, come kick it with me!</p>
+        <p>Let's !</p>
         <p className="lead">
           {getButton()}
         </p>

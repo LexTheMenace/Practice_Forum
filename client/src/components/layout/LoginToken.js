@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Context, Consumer } from '../context';
+import { Context, Consumer } from '../../context';
 
 export default function LoginToken() {
     const theme = useContext(Context);

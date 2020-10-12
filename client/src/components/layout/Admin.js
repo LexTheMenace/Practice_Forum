@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Context, Consumer } from '../context'
+import { Context, Consumer } from '../../context'
+import CategoryList from '../CategoryList';
 
 function Admin() {
     const theme = useContext(Context);
@@ -23,10 +24,7 @@ function Admin() {
         .then(admin => {
             if (!admin) {
                 window.location.hash = '/forum'
-            } else {
-                loadCategories()
             }
-            
         })
     }, [])
 
@@ -42,19 +40,7 @@ function Admin() {
     return (
         <div>
             <h1>Admin Page</h1>
-            <div className="list-group">
-                {categories.map(category => {
-                    return (
-                        <a key={category._id} href="#" className="list-group-item list-group-item-action flex-column align-items-start ">
-                            <div className="d-flex w-100 justify-content-between">
-                                <h5 className="mb-1">{category.title}</h5>
-                                {/* <small>3 days ago</small> */}
-                            </div>
-                            <p className="mb-1">{category.description} </p>
-                        </a>
-                    )
-                })}
-            </div>
+         <CategoryList categories={categories}/>
             <div className='mt-4'>
 
             <h3>Add Categories</h3>
@@ -68,7 +54,7 @@ function Admin() {
                 <textarea name='description' className='form-control' id='description' value={newCategory.description} rows='3'></textarea>
                 </div>
                 <div className='form-group'>
-                <label for='image' >Description</label>
+                <label for='image_url' >Image</label>
                 <input name='image_url' className='form-control' id='image' value={newCategory.image_url}></input>
                 </div>
                 <button type='submit' className='btn btn-success'> Add Category </button>

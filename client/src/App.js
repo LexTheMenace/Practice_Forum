@@ -4,9 +4,11 @@ import './App.css';
 import "bootswatch/dist/slate/bootstrap.css";
 import AppNav from './components/layout/AppNav';
 import Jumbotron from './components/layout/Home';
-import LoginToken from './components/LoginToken';
+import LoginToken from './components/layout/LoginToken';
 import { /* Context, */ Provider } from './context';
-import Admin from './components/Admin'
+import Admin from './components/layout/Admin'
+import CategoryList from './components/CategoryList';
+import Forum from './components/layout/Forum';
 /* import { onLoad } from './API' */
 class App extends Component {
 /* componentDidMount(){
@@ -31,6 +33,9 @@ class App extends Component {
           const { isLoggedIn } = value;
           function thids() {*/}
               <Route exact path='/admin' render={() => /* isLoggedIn() ?  */<Admin /> /* : <Jumbotron /> */} /> 
+              <Route exact path='/forum'>
+                <Forum />
+              </Route>
             </div>
           </Switch>
         </Router>

@@ -13,9 +13,12 @@ npm install
 npm run dev
 ```
 ### Tech Used
-React
-Bootswatch
-Node
-Express
-MongoDB
-Mongoose
+* React
+* JavaScript
+* Node.js
+* Express.js
+* Bootstrap/Bootswatch
+* MongoDB
+* Passport Auth
+* JWT Auth
+

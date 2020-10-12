@@ -82,6 +82,7 @@ export class Provider extends Component {
     }
      componentDidMount(){
         this.login(localStorage.token)
+        this.loadCategories()
     } 
     render() {
 
