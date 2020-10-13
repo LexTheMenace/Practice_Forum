@@ -7,7 +7,7 @@ import Jumbotron from './components/layout/Home';
 import LoginToken from './components/layout/LoginToken';
 import { /* Context, */ Provider } from './context';
 import Admin from './components/layout/Admin'
-import CategoryList from './components/CategoryList';
+import Category from './components/Category';
 import Forum from './components/layout/Forum';
 /* import { onLoad } from './API' */
 class App extends Component {
@@ -35,6 +35,9 @@ class App extends Component {
               <Route exact path='/admin' render={() => /* isLoggedIn() ?  */<Admin /> /* : <Jumbotron /> */} /> 
               <Route exact path='/forum'>
                 <Forum />
+              </Route>
+              <Route exact path='/p/:name'>
+                <Category />
               </Route>
             </div>
           </Switch>

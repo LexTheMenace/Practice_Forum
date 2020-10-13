@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { getAllCategories, createCategory } from './API'
-//Makes info available everywhere in the app
+import { getAllCategories, createCategory, createTopic, getAllTopics } from './API'
+
 export const Context = React.createContext();
 
 
@@ -23,11 +23,21 @@ const reducer = (state, action) => {
                 ...state,
                 categories: action.payload
             };
-            case 'PUSH_CATEGORY':
-                return {
-                    ...state,
-                    categories: [...state.categories, action.payload]
-                };
+        case 'PUSH_CATEGORY':
+            return {
+                ...state,
+                categories: [...state.categories, action.payload]
+            };
+        case 'SET_TOPICS':
+            return {
+                ...state,
+                topics: action.payload
+            };
+        case 'PUSH_TOPIC':
+            return {
+                ...state,
+                topics: [...state.topics, action.payload]
+            };
         default:
             return state;
     }
@@ -37,8 +47,8 @@ export class Provider extends Component {
     state = {
         token: '',
         user: null,
-        categories: []
-
+        categories: [],
+        topics: []
     };
 
     dispatch = action => this.setState(state => reducer(state, action));
@@ -50,20 +60,23 @@ export class Provider extends Component {
     };
 
     login = (token) => {
-        
-        this.dispatch({
-            type: 'SET_TOKEN',
-            payload: token
-        });
-        localStorage.token = token;
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace('-', '+').replace('_', '/');
-        const user = JSON.parse(window.atob(base64));
+        if (token && token !== 'undefined') {
+            this.dispatch({
+                type: 'SET_TOKEN',
+                payload: token
+            });
+            localStorage.token = token;
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace('-', '+').replace('_', '/');
+            const user = JSON.parse(window.atob(base64));
 
-        this.dispatch({
-            type: 'SET_USER',
-            payload: user.user
-        });
+            this.dispatch({
+                type: 'SET_USER',
+                payload: user.user
+            });
+        } else {
+            localStorage.token = ''
+        }
     };
 
     loadCategories = async () => {
@@ -80,10 +93,26 @@ export class Provider extends Component {
             payload: category
         })
     }
-     componentDidMount(){
-        this.login(localStorage.token)
-        this.loadCategories()
-    } 
+
+    addTopic = async (newTopic) => {
+        const topic = await createTopic(newTopic, this.state.user);
+        this.dispatch({
+            type: 'PUSH_TOPIC',
+            payload: topic
+        })
+    }
+    loadTopics = async () => {
+        const topics = await getAllTopics();
+        this.dispatch({
+            type: 'SET_TOPICS',
+            payload: topics
+        })
+    }
+    componentDidMount() {
+        this.login(localStorage.token);
+        this.loadCategories();
+        this.loadTopics();
+    }
     render() {
 
         return (
@@ -97,7 +126,8 @@ export class Provider extends Component {
                         isAdmin: this.isAdmin,
                         login: this.login,
                         loadCategories: this.loadCategories,
-                        addCategory: this.addCategory
+                        addCategory: this.addCategory,
+                        addTopic: this.addTopic
 
                     }
                 }} >

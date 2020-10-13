@@ -40,7 +40,7 @@ function Admin() {
     return (
         <div>
             <h1>Admin Page</h1>
-         <CategoryList categories={categories}/>
+         <CategoryList />
             <div className='mt-4'>
 
             <h3>Add Categories</h3>

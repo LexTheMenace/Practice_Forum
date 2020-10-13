@@ -1,17 +1,16 @@
 import React, { useContext} from 'react'
 import { Context } from '../context'
-export default function CategoryList(props) {
+export default function CategoryList() {
     const theme = useContext(Context);
      const { isAdmin, loadCategories, addCategory } = theme.methods
     const { categories } = theme.state;
-    console.log(categories);
-    // const { categories } = props
+  
     if (categories) {
         return (
             <div className="list-group">
                 {categories.map(category => {
                     return (
-                        <a key={category._id} href="#" className="list-group-item list-group-item-action flex-column align-items-start ">
+                        <a key={category._id} href={`#/p/${category.title}`} className="list-group-item list-group-item-action flex-column align-items-start ">
                             <div className="d-flex w-100 justify-content-between">
                                 <h5 className="mb-1">{category.title}</h5>
                                 {/* <small>3 days ago</small> */}

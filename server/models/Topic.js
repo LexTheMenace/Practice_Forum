@@ -4,7 +4,12 @@ const Schema = mongoose.Schema;
 const TopicSchema = new mongoose.Schema({
     category_id: {
         type: Schema.Types.ObjectId,
-        ref: 'Category'
+        ref: 'Category',
+        required: true
+    },
+    category_name: {
+        type: String,
+        required: true
     },
     title: {
         type: String,
@@ -12,7 +17,8 @@ const TopicSchema = new mongoose.Schema({
     },
     user_id: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     description: {
         type: String,
