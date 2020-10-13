@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Context, Consumer } from '../../context'
+import { Context } from '../../context'
 import CategoryList from '../CategoryList';
 
 function Admin() {
     const theme = useContext(Context);
-    const { isAdmin, loadCategories, addCategory } = theme.methods
-    const { categories } = theme.state;
+    const { isAdmin, addCategory } = theme.methods;
    
     const initialState = {
         title: '',
         description: '',
         image_url: ''
-    }
+    };
+
     const [ newCategory, setNewCategory ] = useState(initialState);
    
     async function getAdmin() {

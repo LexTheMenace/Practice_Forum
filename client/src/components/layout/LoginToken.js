@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Context, Consumer } from '../../context';
+import { Context } from '../../context';
 
 export default function LoginToken() {
     const theme = useContext(Context);
@@ -15,7 +15,7 @@ useEffect(() => {
     } else {
         window.location.hash = '/'
     }
-}, [])
+}, [login])
    
                 return <h1 > Logging in... </h1>
 }

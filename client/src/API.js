@@ -21,8 +21,8 @@ export async function createCategory(newCategory){
   return category;
 };
 
-export async function getAllTopics(){
-  const res = await axios.get(`${API_URL}/topics`);
+export async function getAllTopics(id){
+  const res = await axios.get(`${API_URL}/topics/${id}`, );
   const topics = await res.data;
   return topics;
 };
@@ -41,4 +41,21 @@ export async function createTopic(newTopic, user){
 
   const topic = await res.data;
   return topic;
+};
+
+export async function createTopicReply(newTopicReply){
+
+  const res = await axios.post(`${API_URL}/topics/replies`, newTopicReply,  {
+    headers: {
+    authorization: `Bearer ${localStorage.token}`
+  }} );
+console.log(res.data);
+  const reply = await res.data;
+  return reply;
+};
+
+export async function getAllReplies(id){
+  const res = await axios.get(`${API_URL}/topics/replies/${id}`, );
+  const replies = await res.data;
+  return replies;
 };

@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { getAllCategories, createCategory, createTopic, getAllTopics } from './API'
+import {
+    getAllCategories, createCategory,
+    createTopic, getAllTopics,
+    createTopicReply, getAllReplies
+} from './API'
 
 export const Context = React.createContext();
 
@@ -38,6 +42,16 @@ const reducer = (state, action) => {
                 ...state,
                 topics: [...state.topics, action.payload]
             };
+        case 'PUSH_REPLY':
+            return {
+                ...state,
+                replies: [...state.replies, action.payload]
+            };
+        case 'SET_REPLIES':
+            return {
+                ...state,
+                replies: action.payload
+            };
         default:
             return state;
     }
@@ -48,7 +62,8 @@ export class Provider extends Component {
         token: '',
         user: null,
         categories: [],
-        topics: []
+        topics: [],
+        replies: []
     };
 
     dispatch = action => this.setState(state => reducer(state, action));
@@ -101,17 +116,34 @@ export class Provider extends Component {
             payload: topic
         })
     }
-    loadTopics = async () => {
-        const topics = await getAllTopics();
+    loadTopics = async (id) => {
+        const topics = await getAllTopics(id);
         this.dispatch({
             type: 'SET_TOPICS',
             payload: topics
         })
     }
+
+    addTopicReply = async (newReply) => {
+
+        const reply = await createTopicReply(newReply);
+
+        this.dispatch({
+            type: 'PUSH_REPLY',
+            payload: reply
+        })
+    }
+    loadReplies = async (id) => {
+        const replies = await getAllReplies(id);
+        this.dispatch({
+            type: 'SET_REPLIES',
+            payload: replies
+        })
+    }
+
     componentDidMount() {
         this.login(localStorage.token);
         this.loadCategories();
-        this.loadTopics();
     }
     render() {
 
@@ -127,7 +159,11 @@ export class Provider extends Component {
                         login: this.login,
                         loadCategories: this.loadCategories,
                         addCategory: this.addCategory,
-                        addTopic: this.addTopic
+                        addTopic: this.addTopic,
+                        loadTopics: this.loadTopics,
+                        addTopicReply: this.addTopicReply,
+                        loadReplies: this.loadReplies,
+
 
                     }
                 }} >

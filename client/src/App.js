@@ -5,16 +5,14 @@ import "bootswatch/dist/slate/bootstrap.css";
 import AppNav from './components/layout/AppNav';
 import Jumbotron from './components/layout/Home';
 import LoginToken from './components/layout/LoginToken';
-import { /* Context, */ Provider } from './context';
+import { Provider } from './context';
 import Admin from './components/layout/Admin'
 import Category from './components/Category';
 import Forum from './components/layout/Forum';
-/* import { onLoad } from './API' */
+import Topic from './components/Topic';
+
 class App extends Component {
-/* componentDidMount(){
-  onLoad(Context)
-}
-   */
+
   render() {
 
     return (
@@ -35,6 +33,9 @@ class App extends Component {
               <Route exact path='/admin' render={() => /* isLoggedIn() ?  */<Admin /> /* : <Jumbotron /> */} /> 
               <Route exact path='/forum'>
                 <Forum />
+              </Route>
+              <Route exact path='/p/:name/replies/:id'>
+                <Topic />
               </Route>
               <Route exact path='/p/:name'>
                 <Category />
