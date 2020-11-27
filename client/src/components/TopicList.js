@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react'
-import { Context } from '../context'
+import { loadTopics } from '../actions/forumActions';
+import { ForumContext } from '../context/forumContext';
+
 export default function TopicList({ category }) {
-    const theme = useContext(Context);
-    const { loadTopics } = theme.methods
-    const { topics } = theme.state
+    const [state, dispatch] = useContext(ForumContext);
+    const { topics } = state
 
     useEffect(() => {
-       loadTopics(category._id)
+       loadTopics(dispatch, category._id)
     }, [])
      
     

@@ -30,6 +30,7 @@ mongoose.connect(uri)
  .catch(err => console.log(err))
 
 app.use(checkAuthHeaderSetUser)
+
 // Routes
 app.get('/', (req, res) => {
     res.json({

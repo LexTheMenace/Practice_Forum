@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { Context } from '../../context'
+import { ForumContext } from '../../context/forumContext'
 
 export default function Jumbotron() {
   
-  const context = useContext(Context);
-  const { user } = context.state;
- 
+  const [state, dispatch] = useContext(ForumContext);
+  const { user } = state;
+
   const getLoginUrl = () => {
     if(window.location.hostname === 'localhost') {
       return 'http://localhost:3000/auth/google'
@@ -26,7 +26,7 @@ export default function Jumbotron() {
         <h1 className="display-3">Seasons Greetings!</h1>
         <p className="lead">Welcome to The forum! </p>
         <hr className="my-4"/>
-        <p>Let's !</p>
+        <p>Let's Get Started!</p>
         <p className="lead">
           {getButton()}
         </p>

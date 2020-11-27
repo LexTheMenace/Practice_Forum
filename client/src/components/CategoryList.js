@@ -1,13 +1,15 @@
 import React, { useContext} from 'react'
-import { Context } from '../context'
+import { loadCategories } from '../actions/forumActions';
+import { ForumContext } from '../context/forumContext';
 export default function CategoryList() {
-    const theme = useContext(Context);
-     const { loadCategories } = theme.methods
-    const { categories } = theme.state;
-  
-    if (categories) {
+    const [state, dispatch] = useContext(ForumContext);
+
+    const { categories } = state;
+  console.log(categories);
+    if (categories.length > 0) {
         return (
             <div className="list-group">
+                <h2>Categories</h2>
                 {categories.map(category => {
                     return (
                         <a key={category._id} id={category._id} href={`#/p/${category.title}`} className="list-group-item list-group-item-action flex-column align-items-start ">
@@ -22,7 +24,7 @@ export default function CategoryList() {
             </div>
         )
     } else {
-       loadCategories()
+       loadCategories(dispatch)
         return <h1> Loading... </h1>
     }
 }

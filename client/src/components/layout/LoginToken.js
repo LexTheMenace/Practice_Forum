@@ -1,15 +1,16 @@
 import React, { useEffect, useContext } from 'react';
-import { Context } from '../../context';
+import { login } from '../../actions/authActions';
+import { ForumContext } from '../../context/forumContext';
 
 export default function LoginToken() {
-    const theme = useContext(Context);
-const { login } = theme.methods;
+    const [state, dispatch] = useContext(ForumContext);
+
 
 useEffect(() => {
      const location = window.location.hash.split('/');
     const token = location[location.length - 1];
     if(token) {
-        login(token);
+       login(dispatch, token)
         window.location.hash = '/forum'
 
     } else {

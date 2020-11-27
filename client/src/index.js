@@ -2,10 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Store from './Store';
+
+const Index = () => {
+  return (
+    <Store>
+      <App/>
+    </Store>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Index />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -31,7 +31,6 @@ async function checkAuthHeaderSetUserUnauthorized(req, res, next) {
     next(new Error('Un-Authorized'));
         }
     }
-  
     res.status(401);
     next(new Error('Un-Authorized'));
 }

@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Context } from '../../context'
+import { isAdmin } from '../../actions/authActions';
+import { addCategory } from '../../actions/forumActions';
+import { ForumContext } from '../../context/forumContext';
 import CategoryList from '../CategoryList';
 
 function Admin() {
-    const theme = useContext(Context);
-    const { isAdmin, addCategory } = theme.methods;
-   
+    const [ state, dispatch ]= useContext(ForumContext);
+ 
     const initialState = {
         title: '',
         description: '',
@@ -15,7 +16,7 @@ function Admin() {
     const [ newCategory, setNewCategory ] = useState(initialState);
    
     async function getAdmin() {
-        const res = await isAdmin();
+        const res = await isAdmin(state.user);
         return res
     }
     

@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router';
-import { Context } from '../context';
+import { addTopicReply, loadReplies } from '../actions/forumActions';
+import { ForumContext } from '../context/forumContext';
 import TopicReplies from './TopicReplies';
 
 function Topic() {
     const { id } = useParams();
-    const context = useContext(Context);
-    const { topics, user, replies } = context.state;
-    const { addTopicReply, loadReplies } = context.methods;
+    const [state, dispatch] = useContext(ForumContext);
+    const { topics, user, replies } = state;
+    
 
     const getTopic = () => {
         const topic = topics.filter(topic => topic._id === id)
@@ -28,17 +29,17 @@ function Topic() {
         newReply.topic_id = topic._id
         newReply.user_id = user._id
         if (newReply.description) {
-            addTopicReply(newReply);
+            addTopicReply(dispatch, newReply);
             setNewReply({ description: '' })
         }
     }
 
     useEffect(() => {
-        if (topic) loadReplies(topic._id)
+        if (topic) loadReplies(dispatch, topic._id)
     }, [])
 
-    return (
-        topic && user._id ?
+    return ( 
+        topic && user ?
             <div className='container'>
                 <div>
                     <div class="jumbotron mt-3" style={{width: '50vw', margin: 'auto'}}>

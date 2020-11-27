@@ -5,18 +5,16 @@ import "bootswatch/dist/slate/bootstrap.css";
 import AppNav from './components/layout/AppNav';
 import Jumbotron from './components/layout/Home';
 import LoginToken from './components/layout/LoginToken';
-import { Provider } from './context';
 import Admin from './components/layout/Admin'
 import Category from './components/Category';
 import Forum from './components/layout/Forum';
 import Topic from './components/Topic';
+import { ForumContextProvider } from './context/forumContext';
 
-class App extends Component {
-
-  render() {
+const App = () => {
 
     return (
-      <Provider>
+      <ForumContextProvider>
         <Router>
           <AppNav />
           <Switch>
@@ -27,9 +25,6 @@ class App extends Component {
               <Route exact path='/'>
                 <Jumbotron />
               </Route>
-              {/*  {value => {
-          const { isLoggedIn } = value;
-          function thids() {*/}
               <Route exact path='/admin' render={() => /* isLoggedIn() ?  */<Admin /> /* : <Jumbotron /> */} /> 
               <Route exact path='/forum'>
                 <Forum />
@@ -43,11 +38,11 @@ class App extends Component {
             </div>
           </Switch>
         </Router>
-      </Provider>
+      </ForumContextProvider>
 
 
     );
   }
-}
+
 
 export default App;

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useParams} from 'react-router-dom';
-import { Context } from '../context';
+import { addTopic } from '../actions/forumActions';
+import { ForumContext } from '../context/forumContext';
 import TopicList from './TopicList'
 export default function Category() {
     const initialState = {
@@ -11,21 +12,23 @@ export default function Category() {
 
     const [newTopic, setNewTopic] = useState(initialState)
     const [show, setShow] = useState(false);
-    const context = useContext(Context);
-    const { addTopic } = context.methods
-    const { categories } = context.state
-    const { name  } = useParams()
-    const category = categories.filter(category => category.title === name)
+    const [state, dispatch] = useContext(ForumContext);
+    
+    const { categories, user } = state
+    const { name  } = useParams();
+    const category = categories.filter(category => category.title === name);
+
     const onChange = (e) => setNewTopic({ 
         ...newTopic,
      [e.target.name]: e.target.value 
     });
+
     const onSubmit = (e) => {
         e.preventDefault();
         newTopic.category_name = name;
 
         if(newTopic.title && newTopic.description) {
-            addTopic(newTopic); 
+            addTopic(dispatch, newTopic, user); 
             setNewTopic(initialState);
             setShow(false);
         }
@@ -35,8 +38,8 @@ export default function Category() {
 
     return (
 category.length === 1 ? <div>
-            {name}<br />
-            <button class="btn btn-primary" onClick={() => setShow(!show)}>{show ? 'x' : '+'}</button>
+            <h2>{name}</h2><br />
+            <button class="btn btn-primary" onClick={() => setShow(!show)}>{show ? 'x' : 'Post Topic'}</button>
             <img style={{float: 'right', width: '50px', height: '50px', overflow: 'hidden'}} src={category[0] ? category[0].image_url : null}></img>
             
             <form onSubmit={onSubmit} onChange={onChange} style={{ display: show ? 'block' : 'none' }}>
