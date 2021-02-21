@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db = require("../models");
+const { Role } = require("../models");
 
 //Set db to variable
 const uri = process.env.MONGODB_URI || require('../config/keys').mongoURI; 
@@ -9,19 +9,21 @@ mongoose.connect(uri)
 
 const roleSeed = [
     {
+      _id: 1,
       name: 'user'
     },
     {
+      _id: 2,
       name: 'moderator'
     },  
     {
+      _id: 3,
       name: 'admin'
-    },
-
+    }
 ];
 
-db.Role.remove({})
-  .then(() => db.Role.collection.insertMany(roleSeed))
+Role.remove({})
+  .then(() => Role.collection.insertMany(roleSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     console.log(data.result);
@@ -31,4 +33,3 @@ db.Role.remove({})
     console.error(err);
     process.exit(1);
   });
-
