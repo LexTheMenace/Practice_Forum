@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     role_id: {
-        type: Schema.Types.ObjectId,
+        type: Number,
         ref: 'Role'
     },
     image_url: String
