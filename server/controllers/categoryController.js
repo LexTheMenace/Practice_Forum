@@ -1,12 +1,4 @@
 const db = require('../models');
-const Joi = require('joi');
-const { insertIntoTableAndValidate } = require('./index');
-const schema = Joi.object().keys({
-  title: Joi.string().required(),
-  description: Joi.string().required(),
-  image_url: Joi.string()
-});
-
 
 module.exports = {
   insert: (category) => {

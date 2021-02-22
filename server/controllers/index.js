@@ -1,4 +1,3 @@
-const Joi = require('joi');
 const db = require('../models');
 
 /* async function insertIntoTableAndValidate(table_name, item, schema) {
