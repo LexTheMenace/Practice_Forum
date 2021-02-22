@@ -31,16 +31,8 @@ mongoose.connect(uri)
 app.use(checkAuthHeaderSetUser)
 
 // Routes
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Hey'
-    })
-})
-app.get('/login', (req, res) => {
-    res.json({
-        message: 'Didn"t work'
-    })
-})
+app.use('/', express.static("client/build/"));
+
 // Auth
 app.use('/auth', auth);
 
