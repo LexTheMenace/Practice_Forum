@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useStoreContext } from '../../context/Store';
 
 const Home = () => {
@@ -9,12 +10,12 @@ const Home = () => {
     if(window.location.hostname === 'localhost') {
       return 'http://localhost:3000/auth/google'
     } else {
-      return 'http:deployed.url/auht/goole'
+      return 'https://blooming-beyond-08989.herokuapp.com/auth/google'
     }
   }
   const getButton = () => {
     if (user && user !== null) {
-      return <a className="btn btn-primary btn-lg" href='http://localhost:3001/#/forum' role="button">Go To Forum</a>
+      return <Link className="btn btn-primary btn-lg" to='/forum' role="button">Go To Forum</Link>
     } else { 
       return <a className="btn btn-primary btn-lg" href={getLoginUrl()} role="button">Log In With Google!</a>
     }
