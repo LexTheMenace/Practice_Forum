@@ -31,7 +31,7 @@ mongoose.connect(uri)
 app.use(checkAuthHeaderSetUser)
 
 // Routes
-app.use('/', express.static("client/build/"));
+app.use('/', express.static("../client/build/"));
 
 // Auth
 app.use('/auth', auth);
