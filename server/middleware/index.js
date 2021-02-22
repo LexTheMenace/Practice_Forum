@@ -7,7 +7,6 @@ async function checkAuthHeaderSetUser(req, res, next) {
         try {
             const user = await verify(token);
             req.user = user;
-            console.log(user);
         } catch (err) {
             console.log(err);
         }

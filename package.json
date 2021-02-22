@@ -2,8 +2,7 @@
     "main": "server/server.js",
     "scripts": {
       "install": "cd client && npm install",
-      "start": "cd server && node server.js",
-      "server": "nodemon server",
+      "start": "cd server && node ./bin/www",
       "client": "npm start --prefix client",
       "build": "cd client && npm run build",
       "dev": "concurrently \" npm run server\" \" npm run client\""

@@ -22,8 +22,7 @@ app.use(cors());
 
 app.use('/api/v1', api)
 //Set db to variable
-const uri = process.env.MONGODB_URI || require('./config/keys').mongoURI; 
-
+const uri = process.env.MONGODB_URI
 //Connect to Mongo
 mongoose.connect(uri)
  .then(() => console.log('MongoDB Connected...'))

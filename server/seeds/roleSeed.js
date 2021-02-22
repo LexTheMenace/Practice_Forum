@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const { Role } = require("../models");
+require('dotenv').config();
 
 //Set db to variable
-const uri = process.env.MONGODB_URI || require('../config/keys').mongoURI; 
+const uri = process.env.MONGODB_URI;
 
 //Connect to Mongo
 mongoose.connect(uri)
