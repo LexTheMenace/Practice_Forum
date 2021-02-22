@@ -1,9 +1,6 @@
-import React from 'react'
-import CategoryList from '../CategoryList'
-export default function Forum() {
-    return (
-        <div>
-            <CategoryList/>
-        </div>
-    )
-}
+import React from 'react';
+import CategoryList from '../CategoryList';
+
+const Forum = () => <CategoryList/>;
+
+export default Forum;

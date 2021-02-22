@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useStoreContext } from '../../context/Store';
 
 const AppNav = () => {
   const [open, setOpen] = useState(false);
 
   const toggle = () => setOpen(!open);
+  const { user } = useStoreContext();
   
   return (
     <nav style={{marginBottom: '10px'}} className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -29,6 +31,7 @@ const AppNav = () => {
  <Link className="nav-link" to="/">Admin</Link>
 </li>
     }  */}
+    {user && console.log(user)}
     </ul>
   </div>
       </nav>

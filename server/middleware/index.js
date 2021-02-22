@@ -36,7 +36,7 @@ async function checkAuthHeaderSetUserUnauthorized(req, res, next) {
 }
 
 function isAdmin( req, res, next ) {
-    if (req.user && req.user.role_id === '5f7c93fd189c9a186c9ed6d9') {
+    if (req.user && req.user.role_id === 3) {
         next();
         return 
     }

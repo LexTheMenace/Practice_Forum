@@ -2,7 +2,7 @@
     export const isLoggedIn = () => !!this.state.user;
 
     export const isAdmin = (user) => {
-        if (user !== null) return user.role_id === '5f7c93fd189c9a186c9ed6d9'
+        if (user !== null) return user.role_id === 3;
     };
 
     export const login = (dispatch, token) => {

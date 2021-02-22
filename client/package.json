@@ -9,11 +9,10 @@
     "axios": ">=0.21.1",
     "bootswatch": "^4.5.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-strap": "0.0.1",
     "sass": "^1.26.12"
   },
   "scripts": {

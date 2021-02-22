@@ -1,9 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useParams} from 'react-router-dom';
 import { addTopic } from '../actions/forumActions';
-import { ForumContext } from '../context/forumContext';
-import TopicList from './TopicList'
-export default function Category() {
+import { useForumContext } from '../context/forumContext';
+import { useStoreContext } from '../context/Store';
+import TopicList from './TopicList';
+
+const Category = () => {
+    const { categories, dispatch } = useForumContext();
+    const {user} = useStoreContext();
+
     const initialState = {
         title: '',
         description: ''
@@ -12,9 +17,6 @@ export default function Category() {
 
     const [newTopic, setNewTopic] = useState(initialState)
     const [show, setShow] = useState(false);
-    const [state, dispatch] = useContext(ForumContext);
-    
-    const { categories, user } = state
     const { name  } = useParams();
     const category = categories.filter(category => category.title === name);
 
@@ -60,3 +62,4 @@ category.length === 1 ? <div>
         </div> : <h1>no</h1>
     )
 }
+export default Category;

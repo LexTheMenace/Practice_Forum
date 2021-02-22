@@ -1,19 +1,19 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { loadTopics } from '../actions/forumActions';
-import { ForumContext } from '../context/forumContext';
+import { useForumContext } from '../context/forumContext';
 
-export default function TopicList({ category }) {
-    const [state, dispatch] = useContext(ForumContext);
-    const { topics } = state
-
-    useEffect(() => {
-       loadTopics(dispatch, category._id)
-    }, [])
-     
+const TopicList = ({ category }) => {
+    const {topics, dispatch} = useForumContext();
     
-     if (topics && topics.length !== 0) {
-          return (
-              <div className="list-group">
+    
+    useEffect(() => {
+        loadTopics(dispatch, category._id)
+    }, [])
+    
+    
+    if (topics && topics.length !== 0) {
+        return (
+            <div className="list-group">
                   {topics.map(topic => {
                       return (
                           <a key={topic._id}  href={`#/p/${category.title}/replies/${topic._id}`} className="list-group-item list-group-item-action flex-column align-items-start ">
@@ -24,10 +24,11 @@ export default function TopicList({ category }) {
                               <p className="mb-1">{topic.description} </p>
                           </a>
                       )
-                  })}
+                    })}
               </div>
           )
-      } else {
-          return <h3> No topics for this category yet... Will you be the first? </h3>
-      } 
-}
+        } else {
+            return <h3> No topics for this category yet... Will you be the first? </h3>
+        } 
+    }
+    export default TopicList;

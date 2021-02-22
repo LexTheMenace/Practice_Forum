@@ -1,11 +1,10 @@
-import React, { useContext} from 'react'
+import React from 'react'
 import { loadCategories } from '../actions/forumActions';
-import { ForumContext } from '../context/forumContext';
-export default function CategoryList() {
-    const [state, dispatch] = useContext(ForumContext);
+import { useForumContext } from '../context/forumContext';
 
-    const { categories } = state;
-  console.log(categories);
+const CategoryList = () => {
+    const { categories, dispatch} = useForumContext();
+
     if (categories.length > 0) {
         return (
             <div className="list-group">
@@ -28,3 +27,5 @@ export default function CategoryList() {
         return <h1> Loading... </h1>
     }
 }
+
+export default CategoryList;

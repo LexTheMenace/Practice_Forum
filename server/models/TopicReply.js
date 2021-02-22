@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const topicReplySchema = new mongoose.Schema({
+const topicReplySchema = new Schema({
     topic_id: {
         type: Schema.Types.ObjectId,
         ref: 'Topic'
@@ -9,6 +9,10 @@ const topicReplySchema = new mongoose.Schema({
     user_id: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    user_name: {
+        type: 'String',
+        required: true
     },
     description: {
         type: String,

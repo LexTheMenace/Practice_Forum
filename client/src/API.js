@@ -3,8 +3,9 @@ let BASE_URL = 'http:deployed.url';
 
  if(window.location.hostname === 'localhost') {
     BASE_URL = 'http://localhost:3000';
-  } ;
-  const API_URL = `${BASE_URL}/api/v1`;
+};
+
+const API_URL = `${BASE_URL}/api/v1`;
 
 export async function getAllCategories(){
   const res = await axios.get(`${API_URL}/categories`);
@@ -49,7 +50,6 @@ export async function createTopicReply(newTopicReply){
     headers: {
     authorization: `Bearer ${localStorage.token}`
   }} );
-console.log(res.data);
   const reply = await res.data;
   return reply;
 };

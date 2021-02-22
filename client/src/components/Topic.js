@@ -1,19 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import { addTopicReply, loadReplies } from '../actions/forumActions';
-import { ForumContext } from '../context/forumContext';
+import { useForumContext } from '../context/forumContext';
+import { useStoreContext } from '../context/Store';
 import TopicReplies from './TopicReplies';
 
-function Topic() {
+const Topic = () => {
     const { id } = useParams();
-    const [state, dispatch] = useContext(ForumContext);
-    const { topics, user, replies } = state;
+    const { user } = useStoreContext();
+    const {topics,  replies, dispatch} = useForumContext();
     
+    const getTopic = () => topics.filter(topic => topic._id === id)[0];
 
-    const getTopic = () => {
-        const topic = topics.filter(topic => topic._id === id)
-        return topic[0]
-    }
     const topic = getTopic();
 
     const [newReply, setNewReply] = useState('')
@@ -26,13 +24,15 @@ function Topic() {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        newReply.topic_id = topic._id
-        newReply.user_id = user._id
+        newReply.topic_id = topic._id;
+        newReply.user_id = user._id;
+        newReply.user_name = user.display_name;
+        
         if (newReply.description) {
             addTopicReply(dispatch, newReply);
             setNewReply({ description: '' })
-        }
-    }
+        };
+    };
 
     useEffect(() => {
         if (topic) loadReplies(dispatch, topic._id)
@@ -59,8 +59,6 @@ function Topic() {
                
             </div> : <h1> No topic here... </h1>
     )
+};
 
-
-
-}
 export default Topic;

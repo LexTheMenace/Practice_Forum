@@ -14,7 +14,7 @@ passport.use(new GoogleStrategy({
     email,
     google_id: profile.id,
     image_url: profile.photos[0].value,
-    role_id: '5f7c93fd189c9a186c9ed6d7'
+    role_id: 1
   };
 
   try {
@@ -26,9 +26,9 @@ passport.use(new GoogleStrategy({
     } else {
       console.log('no user... creating');
       const admins = await users.findAdmins();
-      console.log(admins);
+
       if (admins.length === 0) {
-        googleUser.role_id = '5f7c93fd189c9a186c9ed6d9';
+        googleUser.role_id = 3;
       }
       user = await users.insert(googleUser);
     }

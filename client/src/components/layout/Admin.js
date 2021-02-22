@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { isAdmin } from '../../actions/authActions';
+import React, { useState } from 'react';
 import { addCategory } from '../../actions/forumActions';
-import { ForumContext } from '../../context/forumContext';
+import { useForumContext } from '../../context/forumContext';
 import CategoryList from '../CategoryList';
 
-function Admin() {
-    const [ state, dispatch ]= useContext(ForumContext);
+const Admin = () => {
+    const { dispatch } = useForumContext(); 
  
     const initialState = {
         title: '',
@@ -14,30 +13,18 @@ function Admin() {
     };
 
     const [ newCategory, setNewCategory ] = useState(initialState);
-   
-    async function getAdmin() {
-        const res = await isAdmin(state.user);
-        return res
-    }
-    
-    useEffect(() => {
-        getAdmin()
-        .then(admin => {
-            if (!admin) {
-                window.location.hash = '/forum'
-            }
-        })
-    }, [])
 
     const onChange = (e) => setNewCategory({ 
         ...newCategory,
      [e.target.name]: e.target.value 
     });
+
     const onSubmit = (e) => {
         e.preventDefault();
-        addCategory(newCategory)
+        addCategory(dispatch, newCategory)
         setNewCategory(initialState)
     }
+
     return (
         <div>
             <h1>Admin Page</h1>

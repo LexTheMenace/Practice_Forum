@@ -5,7 +5,7 @@ const { create , setAdminIfNotExists} = require('./utils');
 
 router.get('/isAdmin', async (req, res) => {
   if(req.user){
-    if( req.user.role_id === '5f7c93fd189c9a186c9ed6d9' ){
+    if( req.user.role_id === 3 ){
       return res.json({
         isAdmin: true
       })
