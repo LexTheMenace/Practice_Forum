@@ -24,7 +24,6 @@ passport.use(new GoogleStrategy({
       googleUser.role_id = user.role_id;
       user = await users.update(user._id, googleUser);
     } else {
-      console.log('no user... creating');
       const admins = await users.findAdmins();
 
       if (admins.length === 0) {
@@ -36,9 +35,5 @@ passport.use(new GoogleStrategy({
   } catch (err) {
 return cb(err)
   }
-
-  /* User.findOrCreate({ googleId: profile.id }, function (err, user) {
-       return done(err, user);
-     }); */
 }
 ));
