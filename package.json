@@ -3,6 +3,7 @@
     "scripts": {
       "install": "cd client && npm install",
       "start": "cd server && node ./bin/www",
+      "server": "npm start --prefix server",
       "client": "npm start --prefix client",
       "build": "cd client && npm run build",
       "dev": "concurrently \" npm run server\" \" npm run client\""

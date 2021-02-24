@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require('express'), env = process.env.NODE_ENV || 'development';
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
@@ -13,6 +13,17 @@ const auth = require('./auth');
 const api = require('./routes/api')
 var app = express();
 
+var forceSsl = function (req, res, next) {
+ if (req.headers['x-forwarded-proto'] !== 'https') {
+     return res.redirect(['https://', req.get('Host'), req.url].join(''));
+ }
+ return next();
+};
+
+if (env === 'production') {
+     app.use(forceSsl);
+ };
+ 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
