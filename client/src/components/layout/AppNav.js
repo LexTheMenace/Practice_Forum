@@ -26,16 +26,15 @@ const AppNav = () => {
       <li className="nav-item">
         <Link className="nav-link disabled" to="/chat" >Chat (Coming Soon!)</Link>
       </li>
-      {user && 
+   {/*    {user && 
         <li className="nav-item">
         <Link className="nav-link disabled" to={`/user/${user._id}`} >Profile { user.display_name}</Link>
-      </li>}
+      </li>} */}
 {/*     { check if user is admin and render admin link &&
  <li className="nav-item">
  <Link className="nav-link" to="/">Admin</Link>
 </li>
     }  */}
-    {user && console.log(user)}
     </ul>
   </div>
       </nav>
