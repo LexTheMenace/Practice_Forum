@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useReducer } from 'react';
 import userReducer from '../reducers/userReducer';
 
 const initialState = {
@@ -10,7 +10,6 @@ const StoreContext = React.createContext();
 
 const Store = ({ children }) => {
     const [state, dispatch] = useReducer(userReducer, initialState);
-    useEffect(() => console.log(state.user), [state.user]);
 
     return (
         <StoreContext.Provider

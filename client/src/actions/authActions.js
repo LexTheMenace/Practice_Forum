@@ -3,6 +3,9 @@ export const isLoggedIn = () => !!this.state.user;
 export const isAdmin = (user) => {
     if (user !== null) return user.role_id === 3;
 };
+export const isGuest = (user) => {
+    if (user !== null) return user.role_id === 0;
+};
 
 export const login = (dispatch, token) => {
     if (token && token !== 'undefined') {

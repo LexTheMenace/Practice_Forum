@@ -22,7 +22,6 @@ router.get('/google',
 router.get('/google/callback', ( req, res, next ) => {
    passport.authenticate('google', async (err, user) => {
     if (err) { return next(err); }
-
     try {
       const token = await create(user);
       // HIDE TOKEN IN FUTURE/ BEFORE DEPLOYMENT

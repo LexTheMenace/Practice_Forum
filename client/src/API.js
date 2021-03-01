@@ -1,11 +1,47 @@
 import axios from 'axios';
-let BASE_URL = 'http:deployed.url';
+let BASE_URL = 'https://lexs-forum.herokuapp.com';
 
  if(window.location.hostname === 'localhost') {
-    BASE_URL = 'http://localhost:3000';
+    BASE_URL = 'http://localhost:5000';
 };
 
 const API_URL = `${BASE_URL}/api/v1`;
+
+export async function registerNewUser({ display_name, password, password2 }){
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  };
+
+    const { data } = await axios.post(
+      `${API_URL}/users/register`,
+      { display_name, password, password2 },
+      config
+    );
+
+    return data;
+}
+
+export async function loginExistingUser({ display_name, password }){
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  };
+
+  const { data } = await axios.post(
+      `${API_URL}/users/login`,
+      { display_name, password },
+      config
+  );
+
+    return data;  
+}
+
+
 
 export async function getAllCategories(){
   const res = await axios.get(`${API_URL}/categories`);

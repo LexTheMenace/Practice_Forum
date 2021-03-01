@@ -1,0 +1,29 @@
+body{
+    color: #ececec;
+}
+small{
+    color: #aaa;
+}
+.modal:after{
+    content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+    min-height: 100%;
+    min-width: 100%;
+    background: black;
+    opacity: .7;
+    z-index: -1;
+}
+
+
+input:focus{
+    background: white;
+    color: rgb(85, 84, 84);
+}
+
+#modal-warning{
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+

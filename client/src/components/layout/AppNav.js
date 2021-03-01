@@ -11,14 +11,14 @@ const AppNav = () => {
   return (
     <nav style={{marginBottom: '10px'}} className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">Lex's Forum</Link>
-        <button onClick={toggle} class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+        <button onClick={toggle} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
   </button>
 
-  <div class={`navbar-collapse collapse ${open ? 'show' : 'hide'} `} id="navbarColor02">
-    <ul class="navbar-nav ml-auto">
-      <li class={`nav-item ${window.location.hash === '#/' ? 'active' : ''}`}>
-        <Link class="nav-link" to="/" onClick={() => setOpen(false)}>Home</Link>
+  <div className={`navbar-collapse collapse ${open ? 'show' : 'hide'} `} id="navbarColor02">
+    <ul className="navbar-nav ml-auto">
+      <li className={`nav-item ${window.location.hash === '#/' ? 'active' : ''}`}>
+        <Link className="nav-link" to="/" onClick={() => setOpen(false)}>Home</Link>
       </li>
       <li className={`nav-item ${window.location.pathname === '#/forum' ? 'active' : ''}`}>
         <Link className="nav-link" to="/forum" onClick={() => setOpen(false)}>Forum </Link>
@@ -26,6 +26,10 @@ const AppNav = () => {
       <li className="nav-item">
         <Link className="nav-link disabled" to="/chat" >Chat (Coming Soon!)</Link>
       </li>
+      {user && 
+        <li className="nav-item">
+        <Link className="nav-link disabled" to={`/user/${user._id}`} >Profile { user.display_name}</Link>
+      </li>}
 {/*     { check if user is admin and render admin link &&
  <li className="nav-item">
  <Link className="nav-link" to="/">Admin</Link>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import "bootswatch/dist/slate/bootstrap.css";
 import './App.css';
 import AppNav from './components/layout/AppNav';
@@ -18,19 +18,19 @@ const App = () => {
 
   return (
     <Router>
-        <AppNav />
-          <div className="container">
+      <AppNav />
+      <div className="container">
         <Switch>
-            <Route path='/login/token/:token'>
-              <LoginToken />
-            </Route>
-            <Route exact path='/'>
-              <Jumbotron />
-            </Route>
-            {user &&
-             <ForumContextProvider>
-               <Switch>
-                <Route exact path='/admin' render={() => isAdmin(user) ? <Admin /> : <Jumbotron /> } />
+          <Route path='/login/token/:token'>
+            <LoginToken />
+          </Route>
+          <Route exact path='/'>
+            <Jumbotron />
+          </Route>
+          {user &&
+            <ForumContextProvider>
+              <Switch>
+                <Route exact path='/admin' render={() => isAdmin(user) ? <Admin /> : <Jumbotron />} />
                 <Route exact path='/forum'>
                   <Forum />
                 </Route>
@@ -40,18 +40,19 @@ const App = () => {
                 <Route exact path='/p/:name'>
                   <Category />
                 </Route>
-            <Route path='*'>
-              <h2>Not Found</h2>
-            </Route>
-               </Switch>
-            </ForumContextProvider>
-            }
-            <Route path='*'>
-              <h2>Not Found</h2>
-            </Route> 
+                <Route path='*'>
+                  <h2>Not Found</h2>
+                </Route>
+              </Switch>
+            </ForumContextProvider>}
+          <Route path='*'>
+            <h2>Not Logged In</h2>
+            <Link to='/'>Back to Home</Link>
+            {/* Redirect to Home Component */}
+          </Route>
         </Switch>
-          </div>
-      </Router>
+      </div>
+    </Router>
 
 
   );

@@ -4,22 +4,23 @@ import { addTopic } from '../actions/forumActions';
 import { useForumContext } from '../context/forumContext';
 import { useStoreContext } from '../context/Store';
 import TopicList from './TopicList';
+import { isGuest } from '../actions/authActions';
+const initialState = {
+        title: '',
+        description: ''
+    };
 
 const Category = () => {
     const { categories, dispatch } = useForumContext();
-    const {user} = useStoreContext();
+    const { user } = useStoreContext();
+    const { name  } = useParams();
+    const category = categories.filter(category => category.title === name)[0];
 
-    const initialState = {
-        title: '',
-        description: ''
-    }
-    
-
+    const disabled = (isGuest(user) && category._id !== "60367440a7eabd9b101f2fde");
+  
     const [newTopic, setNewTopic] = useState(initialState)
     const [show, setShow] = useState(false);
-    const { name  } = useParams();
-    const category = categories.filter(category => category.title === name);
-
+       
     const onChange = (e) => setNewTopic({ 
         ...newTopic,
      [e.target.name]: e.target.value 
@@ -39,10 +40,22 @@ const Category = () => {
     // Bring get topics function in here eventually
 
     return (
-category.length === 1 ? <div>
+category ? <div>
             <h2>{name}</h2><br />
-            <button class="btn btn-primary" onClick={() => setShow(!show)}>{show ? 'x' : 'Post Topic'}</button>
-            <img style={{float: 'right', width: '50px', height: '50px', overflow: 'hidden'}} src={category[0] ? category[0].image_url : null}></img>
+            <button 
+            class={`btn btn-primary ${disabled && 'disabled'}`} 
+            onClick={() => setShow(!show)}
+            disabled={disabled}
+            >
+                {show ? 'x' : 'Post Topic'}
+                </button>
+            
+            <img 
+            style={{float: 'right', 
+            width: '50px', 
+            height: '50px', 
+            overflow: 'hidden'}} 
+            src={category ? category.image_url : null}></img>
             
             <form onSubmit={onSubmit} onChange={onChange} style={{ display: show ? 'block' : 'none' }}>
                 <fieldset>
@@ -58,7 +71,7 @@ category.length === 1 ? <div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </fieldset>
             </form>
-            <TopicList category={category[0]}/>
+            <TopicList category={category}/>
         </div> : <h1>no</h1>
     )
 }
