@@ -19,7 +19,6 @@ const LoginModal = ({ display }) => {
 
         //LOGIN 
         const token = await loginExistingUser(user);
-        console.log(token);
         if (token) {
             //Clear fields
             window.location.hash = `/login/token/${token}` 
@@ -66,7 +65,7 @@ const LoginModal = ({ display }) => {
                         <div className="form-group row">
                             <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Password </label>
                             <div className="col-sm-9">
-                                <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder='' className="form-control-plaintext" id="password" value={password} />
+                                <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder='****' className="form-control-plaintext" id="password" value={password} />
                             </div>
                         </div>
                         {!login &&
@@ -74,7 +73,7 @@ const LoginModal = ({ display }) => {
                                 <div className="form-group row">
                                     <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Confirm Password </label>
                                     <div className="col-sm-9">
-                                        <input onChange={(e) => setPassword2(e.target.value)} type="password_confirm" placeholder='' className="form-control-plaintext" id="password2" value={password2} />
+                                        <input onChange={(e) => setPassword2(e.target.value)} id='password_confirm' type="password" placeholder='****' className="form-control-plaintext" id="password2" value={password2} />
                                     </div>
                                 </div>
                             </div>

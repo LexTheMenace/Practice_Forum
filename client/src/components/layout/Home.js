@@ -42,8 +42,7 @@ const Home = () => {
         <p className="lead">Welcome to The forum! </p>
         {/* //Weather */}
         <hr className="my-4"/>
-        <p>Let's Get Started!</p>
-        
+        <p>Let's Get Started!</p>      
         <p className="lead">
           {getButton()}
         </p>
