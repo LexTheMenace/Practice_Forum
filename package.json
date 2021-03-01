@@ -22,8 +22,10 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.8",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0"
+  },gi
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
