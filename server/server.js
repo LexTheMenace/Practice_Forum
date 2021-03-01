@@ -11,6 +11,8 @@ require('dotenv').config();
 const { checkAuthHeaderSetUser, notFound, errorHandler } = require('./middleware')
 const auth = require('./auth');
 const api = require('./routes/api');
+const forceSsl = require('./utils/forceSsL');
+
 var app = express();
 
 if(process.env.NODE_ENV === 'production') app.use(forceSsl);
