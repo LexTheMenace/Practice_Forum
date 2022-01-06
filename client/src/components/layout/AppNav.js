@@ -9,7 +9,7 @@ const AppNav = () => {
   const toggle = () => setOpen(!open);
   const { user, dispatch } = useStoreContext();
   const logout = () => {
-    dispatch(LOGOUT);
+    dispatch({type:LOGOUT});
     setOpen(false);
   }
   return (

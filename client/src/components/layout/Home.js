@@ -6,14 +6,6 @@ import Login from './LoginModal';
 const Home = () => {
   
   const { user } = useStoreContext();
-  //GOOGLE LOGIN
-  /* const getLoginUrl = () => {
-    if(window.location.hostname === 'localhost') {
-      return 'http://localhost:3000/auth/google'
-    } else {
-      return 'https://blooming-beyond-08989.herokuapp.com/auth/google'
-    }
-  } */
 
   const getLoginUrl = () => {
     if(window.location.hostname === 'localhost') {
