@@ -1,6 +1,7 @@
 import {
     SET_TOKEN,
-    SET_USER
+    SET_USER,
+    LOGOUT
 } from '../actions/types';
 
 const userReducer = (state, action) => {
@@ -14,6 +15,12 @@ const userReducer = (state, action) => {
             return {
                 ...state,
                 user: action.payload
+            };
+            case LOGOUT:
+            return {
+                ...state,
+                user: null,
+                token: null
             };
         default: throw new Error(`Unrecognized action type: ${action.type}`)
     }

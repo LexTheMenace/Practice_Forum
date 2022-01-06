@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { LOGOUT } from '../../actions/types';
 import { useStoreContext } from '../../context/Store';
 
 const AppNav = () => {
   const [open, setOpen] = useState(false);
 
   const toggle = () => setOpen(!open);
-  const { user } = useStoreContext();
-  
+  const { user, dispatch } = useStoreContext();
+  const logout = () => {
+    dispatch(LOGOUT);
+    setOpen(false);
+  }
   return (
     <nav style={{marginBottom: '10px'}} className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">Lex's Forum</Link>
@@ -25,6 +29,9 @@ const AppNav = () => {
       </li>
       <li className="nav-item">
         <Link className="nav-link disabled" to="/chat" >Chat (Coming Soon!)</Link>
+      </li>
+      <li className={`nav-item`}>
+        <Link className="nav-link" to="/" onClick={() => logout()}>Logout </Link>
       </li>
    {/*    {user && 
         <li className="nav-item">
